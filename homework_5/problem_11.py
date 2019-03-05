@@ -70,15 +70,15 @@ def run(f, lb, ub, letter):
     print("0  nfc:\t\t", res_eval(nfc, x_points, y_points, 0))
     # print("0  ndc:\t\t", res_eval(ndc, x_points, y_points, 0))
     print("0  lc:\t\t", res_eval(lc, x_points, y_points, 0))
-    print("0  polyfit:\t", res_eval(polyfit, x_points, y_points, 0))
+    print("0  polyfit.png:\t", res_eval(polyfit, x_points, y_points, 0))
     print("1  nfc:\t\t", res_eval(nfc, x_points, y_points, 1))
     # print("1  ndc:\t\t", res_eval(ndc, x_points, y_points, 1))
     print("1  lc:\t\t", res_eval(lc, x_points, y_points, 1))
-    print("1  polyfit:\t", res_eval(polyfit, x_points, y_points, 1))
+    print("1  polyfit.png:\t", res_eval(polyfit, x_points, y_points, 1))
     print("2  nfc:\t\t", res_eval(nfc, x_points, y_points, 2))
     # print("2  ndc:\t\t", res_eval(ndc, x_points, y_points, 2))
     print("2  lc:\t\t", res_eval(lc, x_points, y_points, 2))
-    print("2  polyfit:\t", res_eval(polyfit, x_points, y_points, 2))
+    print("2  polyfit.png:\t", res_eval(polyfit, x_points, y_points, 2))
 
 
 with warnings.catch_warnings():
@@ -91,4 +91,4 @@ with warnings.catch_warnings():
 # print(newton_form_coef([-4, -2, 0], [9, 3, 5]))
 # print(newton_div_coef([-4, -2, 0], [9, 3, 5]))
 # print(lagrange_coef([-4, -2, 0], [9, 3, 5]))
-# print(poly.polyfit([-4, -2, 0], [9, 3, 5], 2)[::-1])
+# print(poly.polyfit.png([-4, -2, 0], [9, 3, 5], 2)[::-1])
