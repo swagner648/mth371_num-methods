@@ -20,7 +20,6 @@ def newton_div_coef(x, y):
 def lagrange_coef(x, y):
     n = len(x)
     Lj = np.array([np.array([0.0 for i in range(n)]) for i in range(n)])
-
     for i in range(0, n):
         m = 1.0
         c = 1.0
