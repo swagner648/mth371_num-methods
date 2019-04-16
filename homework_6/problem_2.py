@@ -8,10 +8,11 @@ def newton_form_coef(x, y):
 
 
 def poly_coefficients(x, coeffs):
-    """ Returns a polynomial for ``x`` values for the ``coeffs`` provided.
+    """
+    Returns a polynomial for ``x`` values for the ``coeffs`` provided.
 
-        The coefficients must be in ascending order (``x**0`` to ``x**o``).
-        """
+    The coefficients must be in ascending order (``x**0`` to ``x**o``).
+    """
     o = len(coeffs)
     print(f'# This is a polynomial of order {ord}.')
     y = 0
@@ -107,27 +108,62 @@ def function(x):
     return 1 / (1 + x ** 2)
 
 
-x = np.linspace(-5, 5, 11)
-y = [function(i) for i in x]
-x_new = np.linspace(-5, 5, 201)
-
+x = [16, 20, 24]
+y = [5.61, 144.08, 2721.62]
+# x = [9, 12, 15, 18, 20]
+# y = [0.3081, (0.5558 + 0.5300)/2, 3.1616, 49.2291, 143.6365]
+y = np.array(y)/(60*60)
 plt.scatter(x, y)
+x_new = np.linspace(16, 28, 201)
 plt.plot(x_new, poly_coefficients(x_new, newton_form_coef(x, y)[::-1]))
-plt.plot(x_new, [function(i) for i in x_new])
-plt.ylim(-0.5, 2)
-plt.title('Newton Int')
+px = [28]
+py = poly_coefficients(np.array(px), newton_form_coef(x, y)[::-1]).tolist()
+plt.scatter(px, py)
+for i in range(len(px)):
+    plt.annotate("(" + str(px[i]) + ", " + str(round(py[i], 2)) + ")", (px[i], py[i]))
+plt.title('RbCartesianSumsEq Time Estimates Desktop')
+plt.xlabel("n = (M x N)")
+plt.ylabel("time (hours)")
 plt.show()
 
-plt.scatter(x, y)
-plt.plot(x, y)
-plt.plot(x_new, [function(i) for i in x_new])
-plt.ylim(-0.5, 2)
-plt.title('Linear Spline')
-plt.show()
+# x = [9, 12, 15, 18]
+# y = [0.04209327697753906, 0.27248215675354004, 4.62102484703064, 88.19293689727783]
+# y = np.array(y)/(60*60)
+# x_new = np.linspace(9, 49, 201)
+# plt.scatter(x, y)
+# plt.plot(x_new, poly_coefficients(x_new, newton_form_coef(x, y)[::-1]))
+# px = [21, 25, 30, 36, 42, 49]
+# py = poly_coefficients(np.array(px), newton_form_coef(x, y)[::-1]).tolist()
+# plt.scatter(px, py)
+# for i in range(len(px)):
+#     plt.annotate("(" + str(px[i]) + ", " + str(round(py[i], 2)) + ")", (px[i], py[i]))
+# plt.title('RbCartesianSumsEq Time Estimates Laptop')
+# plt.xlabel("n = (M x N)")
+# plt.ylabel("time (hours)")
+# plt.show()
 
-plt.scatter(x, y)
-plt.plot(x_new, cubic_interp1d(x_new, x, y))
-plt.plot(x_new, [function(i) for i in x_new])
-plt.ylim(-0.5, 2)
-plt.title('Cubic Spline')
-plt.show()
+
+# x = np.linspace(-5, 5, 11)
+# y = [function(i) for i in x]
+# x_new = np.linspace(-5, 5, 201)
+#
+# plt.scatter(x, y)
+# plt.plot(x_new, poly_coefficients(x_new, newton_form_coef(x, y)[::-1]))
+# plt.plot(x_new, [function(i) for i in x_new])
+# plt.ylim(-0.5, 2)
+# plt.title('Newton Int')
+# plt.show()
+#
+# plt.scatter(x, y)
+# plt.plot(x, y)
+# plt.plot(x_new, [function(i) for i in x_new])
+# plt.ylim(-0.5, 2)
+# plt.title('Linear Spline')
+# plt.show()
+#
+# plt.scatter(x, y)
+# plt.plot(x_new, cubic_interp1d(x_new, x, y))
+# plt.plot(x_new, [function(i) for i in x_new])
+# plt.ylim(-0.5, 2)
+# plt.title('Cubic Spline')
+# plt.show()
