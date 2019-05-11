@@ -81,39 +81,75 @@ def central_diff(f, a, b, y_0, n=None, dt=0.001):
     return data
 
 
-def plot_sys(suptitle, data):
+def plot_sys(supertitle, data):
     fig = plt.figure(figsize=(20, 5))
     plot_eqn(fig, 141, [data[1], data[2], data[0]], 't vs y vs x', grid=True)
     plot_eqn(fig, 142, [data[1], data[2]], 'y vs x', xlim=(-5, 5), ylim=(-5, 5), grid=True)
     plot_eqn(fig, 143, [data[0], data[2]], 'y vs t', xlim=(0, 60), ylim=(-5, 5), grid=True)
     plot_eqn(fig, 144, [data[0], data[1]], 'x vs t', xlim=(0, 60), ylim=(-5, 5), grid=True)
-    fig.suptitle(suptitle)
+    fig.suptitle(supertitle)
+    plt.show()
+
+
+def plot_field(supertitle, data):
+    fig, ax = plt.subplots(figsize=(10, 10))
+    for path in data:
+        plot_eqn(ax, 1, [path[1], path[2]], None, xlim=(0, 10), ylim=(0, 10))
+    fig.suptitle(supertitle)
     plt.show()
 
 
 def plot_eqn(fig, pos, data, title, xlim=None, ylim=None, grid=False):
-    if len(data) == 2:
-        ax = fig.add_subplot(pos)
-        ax.plot(data[0], data[1])
-    elif len(data) == 3:
-        ax = fig.add_subplot(pos, projection='3d')
-        ax.plot3D(data[0], data[1], data[2])
+    if pos == 1:
+        fig.plot(data[0], data[1])
     else:
-        raise TypeError('Input data must be either 2 or 3-dimensional.')
-    ax.set_title(title)
-    if xlim is not None:
-        ax.set_xlim(xlim)
-    if ylim is not None:
-        ax.set_ylim(ylim)
-    if grid:
-        ax.grid()
-    return ax
+        if len(data) == 2:
+            ax = fig.add_subplot(pos)
+            ax.plot(data[0], data[1])
+        elif len(data) == 3:
+            ax = fig.add_subplot(pos, projection='3d')
+            ax.plot3D(data[0], data[1], data[2])
+        else:
+            raise TypeError('Input data must be either 2 or 3-dimensional.')
+        ax.set_title(title)
+        if xlim is not None:
+            ax.set_xlim(xlim)
+        if ylim is not None:
+            ax.set_ylim(ylim)
+        if grid:
+            ax.grid()
 
 
-plot_sys('Euler Act 1', euler_sys(lambda t, y: [-0.2 * y[1], 0.8 * y[0]], 0, 60, [2, 0], dt=0.0005))
-plot_sys('Euler Act 2', euler_sys(lambda t, y: [-0.2 * y[1], 0.8 * y[0] - 0.1 * y[1]], 0, 60, [2, 0], dt=0.0005))
-plot_sys('Euler Act 3', euler_sys(lambda t, y: [-0.2 * (y[1] - 2), 0.8 * (y[0] - 2)], 0, 60, [2, 0], dt=0.0005))
+# plot_sys('Euler Act 1', euler_sys(lambda t, y: [-0.2 * y[1], 0.8 * y[0]], 0, 60, [2, 0], dt=0.0005))
+# plot_sys('Euler Act 2', euler_sys(lambda t, y: [-0.2 * y[1], 0.8 * y[0] - 0.1 * y[1]], 0, 60, [2, 0], dt=0.0005))
+# plot_sys('Euler Act 3', euler_sys(lambda t, y: [-0.2 * (y[1] - 2), 0.8 * (y[0] - 2)], 0, 60, [2, 0], dt=0.0005))
+#
+# plot_sys('Central Difference Act 1', central_diff(lambda t, y: [-0.2 * y[1], 0.8 * y[0]], 0, 60, [2, 0], dt=0.0005))
 
-plot_sys('Central Difference Act 1', central_diff(lambda t, y: [-0.2 * y[1], 0.8 * y[0]], 0, 60, [2, 0], dt=0.0005))
+
+def course1(t, y):
+    dx = 0.4 * y[0] - 0.08 * y[0] ** 2 - 0.04 * y[0] * y[1]
+    dy = 0.2 * y[1] - 0.04 * y[1] ** 2 - 0.02 * y[0] * y[1]
+    return [dx, dy]
 
 
+plot_field('Cannibals First Course', [euler_sys(course1, 0, 60, [0.01, 0.3], dt=0.0005),
+                                      euler_sys(course1, 0, 60, [0.01, 10], dt=0.0005),
+                                      euler_sys(course1, 0, 60, [6, 10], dt=0.0005),
+                                      euler_sys(course1, 0, 60, [10, 6], dt=0.0005),
+                                      euler_sys(course1, 0, 60, [10, 2.2], dt=0.0005),
+                                      euler_sys(course1, 0, 60, [10, 0.2], dt=0.0005)])
+
+
+def course2(t, y):
+    dx = 0.4 * y[0] - 0.08 * y[0] ** 2 - 0.02 * y[0] * y[1]
+    dy = 0.2 * y[1] - 0.04 * y[1] ** 2 - 0.05 * y[0] * y[1]
+    return [dx, dy]
+
+
+plot_field('Cannibals Second Course', [euler_sys(course2, 0, 60, [0.01, 0.3], dt=0.0005),
+                                       euler_sys(course2, 0, 60, [0.01, 10], dt=0.0005),
+                                       euler_sys(course2, 0, 60, [1.8, 10], dt=0.0005),
+                                       euler_sys(course2, 0, 60, [4.8, 10], dt=0.0005),
+                                       euler_sys(course2, 0, 60, [10, 7], dt=0.0005),
+                                       euler_sys(course2, 0, 60, [10, 3], dt=0.0005)])

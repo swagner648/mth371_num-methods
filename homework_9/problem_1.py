@@ -60,6 +60,7 @@ def find_roots(Pn, n, a, b):
             if np.sign(Pn_prime(p)) != np.sign(Pn_prime(p + dt)):
                 potential_root = bisect(Pn_prime, a, b, eps)
                 if abs(Pn(potential_root)) < eps:
+                    print("Found using derivative.")
                     roots.append(potential_root)
     return roots
 
@@ -83,16 +84,16 @@ def integrate(f, a, b, quadrature):
     return (b - a) / 2 * sum(w * f((b - a) / 2 * x + (b + a) / 2) for w, x in zip(weights, points))
 
 
-# print("\n1:\n", pd.DataFrame({'roots': gaussian_quadrature(1)[0], 'weights': gaussian_quadrature(1)[1]}))
-# print("\n2:\n", pd.DataFrame({'roots': gaussian_quadrature(2)[0], 'weights': gaussian_quadrature(2)[1]}))
-# print("\n3:\n", pd.DataFrame({'roots': gaussian_quadrature(3)[0], 'weights': gaussian_quadrature(3)[1]}))
-# print("\n4:\n", pd.DataFrame({'roots': gaussian_quadrature(4)[0], 'weights': gaussian_quadrature(4)[1]}))
-# print("\n5:\n", pd.DataFrame({'roots': gaussian_quadrature(5)[0], 'weights': gaussian_quadrature(5)[1]}))
-# print("\n6:\n", pd.DataFrame({'roots': gaussian_quadrature(6)[0], 'weights': gaussian_quadrature(6)[1]}))
-# print("\n7:\n", pd.DataFrame({'roots': gaussian_quadrature(7)[0], 'weights': gaussian_quadrature(7)[1]}))
-# print("\n8:\n", pd.DataFrame({'roots': gaussian_quadrature(8)[0], 'weights': gaussian_quadrature(8)[1]}))
-# print("\n9:\n", pd.DataFrame({'roots': gaussian_quadrature(9)[0], 'weights': gaussian_quadrature(9)[1]}))
-# print("\n10:\n", pd.DataFrame({'roots': gaussian_quadrature(10)[0], 'weights': gaussian_quadrature(10)[1]}))
+print("\n1:\n", pd.DataFrame({'roots': gaussian_quadrature(1)[0], 'weights': gaussian_quadrature(1)[1]}))
+print("\n2:\n", pd.DataFrame({'roots': gaussian_quadrature(2)[0], 'weights': gaussian_quadrature(2)[1]}))
+print("\n3:\n", pd.DataFrame({'roots': gaussian_quadrature(3)[0], 'weights': gaussian_quadrature(3)[1]}))
+print("\n4:\n", pd.DataFrame({'roots': gaussian_quadrature(4)[0], 'weights': gaussian_quadrature(4)[1]}))
+print("\n5:\n", pd.DataFrame({'roots': gaussian_quadrature(5)[0], 'weights': gaussian_quadrature(5)[1]}))
+print("\n6:\n", pd.DataFrame({'roots': gaussian_quadrature(6)[0], 'weights': gaussian_quadrature(6)[1]}))
+print("\n7:\n", pd.DataFrame({'roots': gaussian_quadrature(7)[0], 'weights': gaussian_quadrature(7)[1]}))
+print("\n8:\n", pd.DataFrame({'roots': gaussian_quadrature(8)[0], 'weights': gaussian_quadrature(8)[1]}))
+print("\n9:\n", pd.DataFrame({'roots': gaussian_quadrature(9)[0], 'weights': gaussian_quadrature(9)[1]}))
+print("\n10:\n", pd.DataFrame({'roots': gaussian_quadrature(10)[0], 'weights': gaussian_quadrature(10)[1]}))
 
 print("\na) \t1 / x ** 0.5")
 print("Actual:\t\t\t\t", 1.1715728752538099)
